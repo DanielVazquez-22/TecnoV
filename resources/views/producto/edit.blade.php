@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('content')
+<div class="container">
+
 <h2>Editar Producto</h2>
 
 <form method="POST" action="{{ url('/producto/'.$producto->id)}}"  enctype="multipart/form-data">
@@ -5,4 +9,5 @@
         @include('producto.form',['modo'=>'Editar'])
     
 </form>
-
+</div>
+@endsection

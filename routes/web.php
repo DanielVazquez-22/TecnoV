@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +16,7 @@ use App\Http\Controllers\ProductoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 /* 
 Route::get('/producto', function () {
@@ -23,8 +25,14 @@ Route::get('/producto', function () {
 
 Route::get('/producto/create',[ProductoController::class,'create']); */
 
-Route::resource('producto',ProductoController::class);
+Route::resource('producto',ProductoController::class)->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register'=>false,'reset'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [ProductoController::class, 'index'])->name('home');
+
+
+Route::group(['Middleware' => 'auth'], function() {
+    Route::get('/', [ProductoController::class, 'index'])->name('home');
+
+});
