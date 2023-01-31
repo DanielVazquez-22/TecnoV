@@ -17,7 +17,7 @@ class ProductoController extends Controller
     {
         // Metodo para manejar un GET
         
-        $datos['productos'] = Producto::paginate(5);
+        $datos['productos'] = Producto::paginate(10);
         
         return view('producto.index', $datos);
     }
@@ -105,7 +105,9 @@ class ProductoController extends Controller
 
         Producto::where('id', '=', $id)->update($datosProducto);
         $producto = Producto::findOrFail($id);
-        return view('producto.edit', compact('producto'));
+        //return view('producto.edit', compact('producto'));
+
+        return redirect('producto')->with('mensaje','Producto Actualizado');
     }
 
     /**
@@ -124,6 +126,8 @@ class ProductoController extends Controller
 
         Producto::destroy($id);
 
-        return redirect('producto');
+        //return redirect('producto');
+        return redirect('producto')->with('mensaje','Producto Borrado');
+
     }
 }

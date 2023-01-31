@@ -1,14 +1,21 @@
 @extends('layouts.app')
-@section('content')
+@section('content') 
 <div class="container"> 
 
 @if (Session::has('mensaje'))
-<p>{{ Session::get('mensaje') }}</p>
+
+<div class="alert alert-success alert-dismissible" role="alert">
+   <p>{{ Session::get('mensaje') }}</p>
+   <button class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times</span>
+   </button>           
+</div>
 @endif
+
+<a href="{{url('producto/create')}}" class="btn btn-success" >Crear nuevo producto</a>
+<br><br>
     
-<a href="{{url('producto/create')}}" class="btn btn-success" >Crear nuevo producto</a><br><br>
-    
-<table>
+<table class="table table-light">
         <thead >
             <tr>
                 <th>#</th>
@@ -42,5 +49,6 @@
             @endforeach
         </tbody>
 </table>
+{!! $productos->links() !!}
 </div>
 @endsection

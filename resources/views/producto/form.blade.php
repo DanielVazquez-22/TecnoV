@@ -27,6 +27,6 @@
     <br>
     </div>
 
-    <input type="submit" value="{{ $modo }}">
-    <a href="{{url('producto/')}}">Regresar</a>
+    <input type="submit" class="btn btn-success" value="{{ $modo }}">
+    <a class="btn btn-primary" href="{{url('producto/')}}">Regresar</a>
 </div>
